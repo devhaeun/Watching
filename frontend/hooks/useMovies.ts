@@ -10,7 +10,7 @@ const fetchMovies = async ({
   pageParam: number;
 }) => {
   const res = await fetch(
-    `/api/movies?category=${category}&pageParam=${pageParam}`
+    `/api/movies/category?category=${category}&pageParam=${pageParam}`
   );
 
   if (!res.ok) throw new Error("Network response was not ok");
