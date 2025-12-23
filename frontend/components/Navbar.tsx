@@ -27,12 +27,12 @@ export default function Navbar() {
         {isAuthenticated ? (
           <>
             <span className="text-white">{nickname}님 환영합니다</span>
-            <Button className="bg-red-500">로그아웃</Button>
+            <Button>로그아웃</Button>
           </>
         ) : (
-          <>
-            <Button className="bg-red-500">로그인</Button>
-          </>
+          <Link href={"/sign-in"}>
+            <Button variant="outline">로그인</Button>
+          </Link>
         )}
       </span>
     </div>
