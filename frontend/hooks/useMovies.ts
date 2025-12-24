@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 
-const fetchMovies = async ({
+export const fetchMovies = async ({
   category,
   pageParam,
 }: {
