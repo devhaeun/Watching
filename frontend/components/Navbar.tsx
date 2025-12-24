@@ -23,18 +23,23 @@ export default function Navbar() {
           </Link>
         </span>
       </span>
-      <span className="mr-10">
+      <div className="mr-10">
         {isAuthenticated ? (
           <>
             <span className="text-white">{nickname}님 환영합니다</span>
             <Button>로그아웃</Button>
           </>
         ) : (
-          <Link href={"/sign-in"}>
-            <Button variant="outline">로그인</Button>
-          </Link>
+          <div className="flex gap-3">
+            <Link href={"/sign-in"}>
+              <Button variant="outline">로그인</Button>
+            </Link>
+            <Link href={"/sign-up"}>
+              <Button variant="outline">회원가입</Button>
+            </Link>
+          </div>
         )}
-      </span>
+      </div>
     </div>
   );
 }
