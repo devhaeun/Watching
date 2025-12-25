@@ -1,8 +1,11 @@
 "use client";
 
+import ContentsInfo from "@/components/movie-detail/ContentsInfo";
+import SimilarContents from "@/components/movie-detail/SimilarContents";
 import { Button } from "@/components/ui/button";
 import { useMovieDetails } from "@/hooks/useMovieDetail";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { use } from "react";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
@@ -10,7 +13,16 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
   const { data: movieInfo, isLoading, isError } = useMovieDetails(movieId);
 
-  console.log(movieInfo);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab") || "details";
+
+  const onTabChange = (tabName: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", tabName);
+
+    router.push(`?${params.toString()}`);
+  };
 
   if (!movieInfo || isLoading) {
     return <div className="text-white">로딩중</div>;
@@ -62,9 +74,14 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
       </div>
       <div>
         <div className="h-12 flex justify-center sticky top-[70px] bg-black mb-6 z-1">
-          <Button>콘텐츠 정보</Button>
-          <Button>관련 콘텐츠</Button>
+          <Button onClick={() => onTabChange("details")}>콘텐츠 정보</Button>
+          <Button onClick={() => onTabChange("similar")}>관련 콘텐츠</Button>
         </div>
+        {currentTab === "details" ? (
+          <ContentsInfo id={movieId} />
+        ) : (
+          <SimilarContents id={movieId} />
+        )}
       </div>
     </>
   );

@@ -1,11 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export default async function GET({
-  params,
-}: {
-  params: { movieId: string; detail: string };
-}) {
-  const { movieId, detail } = params;
+export async function GET(
+  request: NextRequest,
+  {
+    params,
+  }: {
+    params: Promise<{ movieId: string; detail: string }>;
+  }
+) {
+  const { movieId, detail } = await params;
 
   // 허용된 항목인지 검증
   const allowedDetails = ["videos", "credits", "similar"];

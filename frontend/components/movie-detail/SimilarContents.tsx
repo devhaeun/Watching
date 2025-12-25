@@ -1,7 +1,7 @@
-export default function SimilarContents() {
+export default function SimilarContents({ id }: { id: string }) {
   return (
     <>
-      <h2 className="text-whtie text-xl mb-2">비슷한 콘텐츠</h2>
+      <h2 className="text-white text-xl mb-2">비슷한 콘텐츠</h2>
     </>
   );
 }
